@@ -9,6 +9,7 @@ class SpidermanSpider(CrawlSpider):
     name = 'spiderman'
     allowed_domains = ['divar']
     start_urls = ['https://divar.ir/v/%D8%B2%D9%85%DB%8C%D9%86-%D9%88%D8%A7%D9%85%D9%84%D8%A7%DA%A9_%D8%B2%D9%85%DB%8C%D9%86-%D9%88-%DA%A9%D9%84%D9%86%DA%AF%DB%8C_%DA%86%D8%A7%D8%A8%D9%87%D8%A7%D8%B1__%D8%AF%DB%8C%D9%88%D8%A7%D8%B1/wXIWH1Je']
+    # start_urls = ['www.google.com']
 
     rules = (
         Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
@@ -24,10 +25,10 @@ class SpidermanSpider(CrawlSpider):
         l = ItemLoader(item=DivarItem(), response=response)        
 
         #Done 
-        l.load_xpath(advertismentTitle, '//h1[contains(@class, "page-title")][1]/text()', MapCompose(unicode.strip, unicode.title)) 
+        l.add_xpath(advertismentTitle, '//h1[contains(@class, "page-title")][1]/text()', MapCompose(unicode.strip, unicode.title)) 
         print(advertismentTitle)
         #Done
-        l.load_xpath(advertismentDescription, '//p[contains(@class, "post-description")][1]/text()') 
+        l.add_xpath(advertismentDescription, '//p[contains(@class, "post-description")][1]/text()') 
 
         # l.load_xpath(advertismentShortURL, '//h1[contains(@class, "page-title")][1]/text()]', MapCompose(unicode.strip, unicode.title)) 
 
